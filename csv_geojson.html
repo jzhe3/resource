@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" >
+        <title>load csv and geojson layer</title>
+    </head>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/themes/light/main.css"  />
+    <script src="https://js.arcgis.com/4.11/"></script>
+    <style>
+        html,
+        body,
+        #viewDiv{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <script>
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/layers/CSVLayer"
+        ], function(Map, MapView, CSVLayer){
+            var map = new Map({
+                basemap: "streets"
+            });
+            const url = ""
+            var csvlayer = new CSVLayer({
+                url: url,
+                copyright: "tomorrgod",
+                longitudeField: "Long",
+                latitudeField: "Lat"
+            });
+            map.add(csvlayer);
+            var view = new MapView({
+                container: "viewDiv",
+                center: [114, 33],
+                zoom:5,
+                map: map
+            });
+        });
+    </script>
+    <body>
+        <div id="viewDiv"></div>
+    </body>
+</html>
